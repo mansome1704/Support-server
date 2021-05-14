@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% comment %} {% load thaidate %} {% endcomment %}
+
+{% block title%}ข้อมูลเซิร์ฟเวอร์ {{ CurrentUser }}{% endblock%}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+    
+       
+    <h4>ข้อมูลเซิร์ฟเวอร์ {{ CurrentUser }}</h4>
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>วันที่</th>              
+              <th>ระบบปฎิบัติการ</th>
+              <th>พื้นที่จัดเก็บ</th>
+              <th>หน่วยความจำ</th>
+              <th>ประเภทของบริการ</th> 
+              <th></th>             
+            </tr>
+          </thead>
+          <tbody>
+          {% for Server in AllServer%}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ Server.Date}} </td>              
+              <td>{{ Server.OS }} </td>
+              <td>{{ Server.Rom }} </td>
+              <td>{{ Server.Ram }}</td>
+              <td>{{ Server.Servics }}</td>
+              <td>
+                <a  class="btn btn-outline-primary btn-sm btn-block"  href="{% url 'EditServer' Server.id %}" role="button">แก้ไข</a>                
+                <a  class="btn btn-outline-danger btn-sm btn-block"  href="{% url 'DeleteServer' Server.id %}" onclick="return confirm('Are you sure?')" role="button">ลบ</a>                
+              </td>
+            </tr>
+            {% endfor %}
+            <tr>
+              <td colspan = 5></td>            
+              <td>
+                <a class="btn btn-success btn-sm btn-block"  href="{% url 'CreateServer'%}" role="button">ขอสนับสนุนเซิร์ฟเวอร์</a>                              
+              </td>
+            </tr>            
+          </tbody>
+        </table>
+      </div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}
