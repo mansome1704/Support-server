@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% comment %} {% load thaidate %} {% endcomment %}
+{% load thaidate %}
 
 {% block title%}ข้อมูลเซิร์ฟเวอร์ {{ CurrentUser }}{% endblock%}
 
@@ -21,7 +21,9 @@
               <th>พื้นที่จัดเก็บ</th>
               <th>หน่วยความจำ</th>
               <th>ประเภทของบริการ</th> 
-              <th></th>             
+              <td>
+                <a class="btn btn-success"  href="{% url 'CreateServer'%}" role="button">ขอสนับสนุน Server</a>                              
+              </td>            
             </tr>
           </thead>
           <tbody>
@@ -34,16 +36,14 @@
               <td>{{ Server.Ram }}</td>
               <td>{{ Server.Servics }}</td>
               <td>
-                <a  class="btn btn-outline-primary btn-sm btn-block"  href="{% url 'EditServer' Server.id %}" role="button">แก้ไข</a>                
-                <a  class="btn btn-outline-danger btn-sm btn-block"  href="{% url 'DeleteServer' Server.id %}" onclick="return confirm('Are you sure?')" role="button">ลบ</a>                
+                <a  class="btn btn-info"  href="{% url 'EditServer' Server.id %}" role="button">แก้ไข</a>                
+                <a  class="btn btn-danger" href="{% url 'DeleteServer' Server.id %}" onclick="return confirm('ยืนยันการลบ')" role="button">ลบ</a>                
               </td>
             </tr>
             {% endfor %}
             <tr>
               <td colspan = 5></td>            
-              <td>
-                <a class="btn btn-success btn-sm btn-block"  href="{% url 'CreateServer'%}" role="button">ขอสนับสนุนเซิร์ฟเวอร์</a>                              
-              </td>
+              
             </tr>            
           </tbody>
         </table>

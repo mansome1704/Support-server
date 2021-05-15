@@ -29,14 +29,14 @@ def listServer(request):
 def EditServer(request,id):
     Server = ServerData.objects.get(id = id)
     if request.method == 'POST':
-        form =  ServerForm(request.POST, instance = Server)
+        form =  ServerForm(request.POST or None, instance = Server)
         if form.is_valid():
             form.save()
             return redirect('/listServer/')
     else:
-       ServerForm  = ServerForm(instance = Server)
-       data = {'form' : ServerForm}
-       return render(request,'EditServer.html',data)
+       MyServerForm  = ServerForm(instance = Server)
+       data = {'form' : MyServerForm}
+       return render(request,'editServer.html',data)
 
 
 # @login_required
