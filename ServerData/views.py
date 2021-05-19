@@ -2,11 +2,12 @@ import os
 import datetime
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-#from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 
 from ServerData.models import ServerData
 # from UserData.models import User
 from ServerData.forms import ServerForm
+
 
 
 def Home(request):
@@ -17,7 +18,7 @@ def ShowData(request):
     return render(request,'Showdata.html')
 
 
-# @login_required
+@login_required
 def listServer(request):
     # CurrentUser = request.user
     Server = ServerData.objects.all()
@@ -25,7 +26,7 @@ def listServer(request):
     return render(request,'Showdata.html',data)
 
 
-# @login_required
+@login_required
 def EditServer(request,id):
     Server = ServerData.objects.get(id = id)
     if request.method == 'POST':
@@ -39,7 +40,7 @@ def EditServer(request,id):
        return render(request,'editServer.html',data)
 
 
-# @login_required
+@login_required
 def CreateServer(request):    
     if request.method == 'POST':
         form = ServerForm(request.POST)
@@ -54,7 +55,7 @@ def CreateServer(request):
         return render(request,'EditServer.html',data)
 
 
-#@login_required
+login_required
 def DeleteServer(request,id):    
     Server = ServerData.objects.get(id = id)
     Server.delete()
@@ -68,3 +69,6 @@ def DeleteServer(request,id):
 def ShowServerForm(request):
     form = ServerForm()
     return render(request,'ServerForm.html',{'form':form})
+
+
+
