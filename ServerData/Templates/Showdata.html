@@ -13,8 +13,8 @@
     <h4>ข้อมูลเซิร์ฟเวอร์ {{ CurrentUser }}</h4>
     <div class="table-responsive">
         <table class="table table-striped table-sm">
-          <thead>
-            <tr class="table-active">
+          <thead class= "table-dark">
+            <tr>
               <th>ลำดับ</th>
               <th>วันที่</th>              
               <th>ระบบปฎิบัติการ</th>
@@ -28,7 +28,7 @@
           </thead>
           <tbody>
           {% for Server in AllServer%}
-            <tr class="table-danger">
+            <tr class="table-info">
               <td>{{ forloop.counter }}</td>
               <td>{{ Server.Date}} </td>              
               <td>{{ Server.OS }} </td>

@@ -35,7 +35,7 @@ class ServerData(models.Model):
     Ram = models.CharField(max_length = 10, choices = Ram, default = '4 GB')
     Servics = models.CharField(max_length = 20, choices = Servics, default = 'Web Server')
     DomainName= models.CharField(max_length=255,default="-" ,verbose_name= "ชื่อโดเมนเนม")
-    
+    Evidence = models.FileField(upload_to='Evidence/', null = True, blank = True)    
 
 def __str__(self):
     return f'{self.data} : {self.OS} : {self.Rom} : {self.Ram} : {self.Services} ' 
