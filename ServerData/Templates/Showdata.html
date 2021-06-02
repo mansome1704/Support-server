@@ -10,25 +10,27 @@
 {% block content %}
 {% load static %} 
        
-    <h4>ข้อมูลเซิร์ฟเวอร์ {{ CurrentUser }}</h4>
-    <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead class= "table-dark">
-            <tr>
-              <th>ลำดับ</th>
-              <th>วันที่</th>              
-              <th>ระบบปฎิบัติการ</th>
-              <th>พื้นที่จัดเก็บ</th>
-              <th>หน่วยความจำ</th>
-              <th>ประเภทของบริการ</th> 
-              <td>
-                <a class="btn btn-success"  href="{% url 'CreateServer'%}" role="button"><i class="fas fa-cart-plus"></i></a>                              
-              </td>            
+    <h4>ข้อมูลเซิร์ฟเวอร์ </h4>
+  <div class="col-md-12">
+        <h4>Django CRUD (Create Read Update Delete)</h4> <span><a class="btn btn-success"  href="{% url 'CreateServer'%}" role="button"><i class="fas fa-cart-plus"></i></a> </span>  
+        <div class="table-responsive">
+  <table id="bootstrapdatatable" class="table table-striped table-bordered" width="100%">
+            <thead>
+            <tr class="text-black table-primary"  align="center">
+              <td>ลำดับ</td>
+              <td>วันที่</td>              
+              <td>ระบบปฎิบัติการ</td>
+              <td>พื้นที่จัดเก็บ</td>
+              <td>หน่วยความจำ</td>
+              <td>ประเภทของบริการ</td> 
+              <td>แก้ไข</td>
+              <td>ลบ</td>
+                          
             </tr>
           </thead>
           <tbody>
           {% for Server in AllServer%}
-            <tr class="table-info">
+            <tr class="table-warning">
               <td>{{ forloop.counter }}</td>
               <td>{{ Server.Date}} </td>              
               <td>{{ Server.OS }} </td>
@@ -36,15 +38,14 @@
               <td>{{ Server.Ram }}</td>
               <td>{{ Server.Servics }}</td>
               <td>
-                <a  class="btn btn-info"  href="{% url 'EditServer' Server.id %}" role="button"><i class="fa fa-edit" ></i></a>                
+                <a  class="btn btn-info"  href="{% url 'EditServer' Server.id %}" role="button"><i class="fa fa-edit" ></i></a>  
+              </td>
+              <td>              
                 <a  class="btn btn-danger" href="{% url 'DeleteServer' Server.id %}" onclick="return confirm('ยืนยันการลบ')" role="button"><i class="fa fa-trash" ></i></a>                
               </td>
             </tr>
             {% endfor %}
-            <tr>
-              <td colspan = 5></td>            
-              
-            </tr>            
+                      
           </tbody>
         </table>
       </div>
