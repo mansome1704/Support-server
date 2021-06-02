@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-{% load Static %} 
+{% load static %} 
        
     <h4>ข้อมูลเซิร์ฟเวอร์ {{ CurrentUser }}</h4>
     <div class="table-responsive">
@@ -22,7 +22,7 @@
               <th>หน่วยความจำ</th>
               <th>ประเภทของบริการ</th> 
               <td>
-                <a class="btn btn-success"  href="{% url 'CreateServer'%}" role="button">ขอสนับสนุน Server</a>                              
+                <a class="btn btn-success"  href="{% url 'CreateServer'%}" role="button"><i class="fas fa-cart-plus"></i></a>                              
               </td>            
             </tr>
           </thead>
@@ -36,8 +36,8 @@
               <td>{{ Server.Ram }}</td>
               <td>{{ Server.Servics }}</td>
               <td>
-                <a  class="btn btn-info"  href="{% url 'EditServer' Server.id %}" role="button">แก้ไข</a>                
-                <a  class="btn btn-danger" href="{% url 'DeleteServer' Server.id %}" onclick="return confirm('ยืนยันการลบ')" role="button">ลบ</a>                
+                <a  class="btn btn-info"  href="{% url 'EditServer' Server.id %}" role="button"><i class="fa fa-edit" ></i></a>                
+                <a  class="btn btn-danger" href="{% url 'DeleteServer' Server.id %}" onclick="return confirm('ยืนยันการลบ')" role="button"><i class="fa fa-trash" ></i></a>                
               </td>
             </tr>
             {% endfor %}
