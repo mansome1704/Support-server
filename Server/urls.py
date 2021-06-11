@@ -18,11 +18,13 @@ from django.contrib import admin
 from django.urls import path,include
 from django.contrib.auth import views
 
-
+# from UserData.forms import MyLoginView
+# from UserData import views as viewsUserData
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('ServerData.urls')),
-    
+    # path('',include('UserData.urls')),
+    # path('addUser/', viewsUserData.addUser , name='addUser'),  
 
 ]

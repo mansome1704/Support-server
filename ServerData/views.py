@@ -8,33 +8,32 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.forms.utils import ErrorList
 from django.http import HttpResponse
-from .forms import LoginForm
+
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from ServerData.models import ServerData
 # from UserData.models import User
 from ServerData.forms import ServerForm
+# from ServerData.Templates import Approve 
 
-def login_view(request):
-    form = LoginForm(request.POST or None)
 
-    msg = None
+def login(request):
+    if request.method == 'POST':
+        print(request.POST['username'])
+        print(request.POST['password'])
+        if request.POST['password'] == 'password':
+            messages.error(redirect,"You not Password")
+            return redirect('login')
+        # messages.info(request,'This is the info message!')
+        # messages.error(request,'ERROR! ERROR!')
+        # messages.success(request,'You registered successfully')
+        # messages.warning(request,'Be careful!')
+    return render(request,'registration/login.html')
 
-    if request.method == "POST":
-
-        if form.is_valid():
-            username = form.cleaned_data.get("username")
-            password = form.cleaned_data.get("password")
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect("/")
-            else:    
-                msg = 'Invalid credentials'    
-        else:
-            msg = 'Error validating the form'    
-
-    return render(request, "login.html", {"form": form, "msg" : msg})
+def show_messages(request):
+    messages.info(request,'This is the info message!')
+    return render(request,'show_messages.html')
+    
 
 @login_required(login_url="/login/")
 def Home(request):
@@ -52,14 +51,7 @@ def listServer(request):
     Server = ServerData.objects.all()
     data = {'AllServer' :  Server}
 
-    return render(request,'Showdata.html',data)
-    meassages.set_level(request,messages.DEBUB)
-    
-    meassages.debug(request,'Save Success')
-    meassages.info(request,'Save Success')
-    meassages.success(request,'Save Seccess')
-    meassages.warning('Save Success')
-    meassages.error('Save Success')
+    return render(request,'Showdata.html',data) 
 
 
 
@@ -107,6 +99,21 @@ def DeleteServer(request,id):
 def ShowServerForm(request):
     form = ServerForm()
     return render(request,'ServerForm.html',{'form':form})
+
+def Approve(request):
+    server = ServerData.objects.all()
+    
+    if request.method == 'POST':
+        form = ServerForm(request.POST)
+        if form.is_valid():
+            NewServer = form.save(commit=False)
+            # NewServer.Person = request.user
+            NewServer.save()
+            return redirect('/listServer/')
+    else:
+        NewServerForm  = ServerForm()
+        data = {'form' : NewServerForm}
+        return render(request,'Approve.html',data)
 
 
 

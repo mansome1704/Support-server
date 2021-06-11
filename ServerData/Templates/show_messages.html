@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        
+        
+        <title>messages</title>
+      
+    </head>
+    <body class="text-center">
+        
+        <hi>Messages</h1>
+        {% if messages %}
+        {% for message in messages %}
+        
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>        
+        {% endfor %}
+        {% endif %}    
+        
+        
+         
+    </body>
+</html>

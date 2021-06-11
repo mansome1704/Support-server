@@ -1,8 +1,10 @@
+from os import name
 from django.contrib import admin
 from django.urls import path, include
-from django.contrib.auth import views as authviews
+from django.contrib.auth import login, views as authviews
 from django.conf import settings
 from django.conf.urls.static import static
+
 
 from . import views 
 
@@ -13,15 +15,17 @@ urlpatterns = [
     path('listServer/',views.listServer, name = 'listServer'),
     path('EditServer/<int:id>/',views.EditServer, name = 'EditServer'),
     path('DeleteServer/<int:id>/',views.DeleteServer, name = 'DeleteServer'),
-    path('account/',include('django.contrib.auth.urls')),
+    path('',include('django.contrib.auth.urls')),
+    path('show_messages/',views.show_messages, name='show_messages'),
+    path('login/',views.login, name='login'),
 
 
-    path('login/',authviews.LoginView.as_view(), name = 'Login'),
-	path('logout/',authviews.LogoutView.as_view(), name = 'Logout'),
+
 
     path('ShowData/',views.ShowData, name = 'ShowData'),
     #path('ShowProjectTemp/',views.ShowProjectTemp, name = 'ShowProjectTemp'),
     path('ShowServerForm/',views.ShowServerForm, name = 'ShowServerForm'),
+    path('Approve/',views.Approve,name='Approve'),
 ]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 
 
